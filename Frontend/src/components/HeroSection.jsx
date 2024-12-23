@@ -3,7 +3,7 @@ import Navbar from './navbar'
 
 const HeroSection = () => {
     return (
-        <div className='bg-[url("/homeBg.jpg")] bg-cover bg-center h-screen px-[50px] py-[30px] '>
+        <div className='bg-[url("/homeBg.jpg")] bg-cover bg-center h-screen px-[50px] py-[30px]  '>
             <div className="flex flex-row items-center  justify-between">
                 <h1 className='text-white text-[25px]'>I.Aivazovsky</h1>
                 <Navbar />
