@@ -1,8 +1,9 @@
 import HeroSection from '../components/HeroSection'
 import Biography from '../components/Biography'
 import Work from '../components/Work'
-import Testinomial from '../components/Testinomial'
+import Testimonials from '../components/Testinomial'
 import Footer from '../components/Footer'
+import CustomePaint from '../components/CustomePaint'
 
 const LandingPage = () => {
     return (
@@ -10,8 +11,8 @@ const LandingPage = () => {
             <HeroSection />
             <Biography />
             <Work />
-            <h1>custome art(exhibition)</h1>
-            <Testinomial />
+            <CustomePaint />
+            <Testimonials />
             <Footer />
 
         </div>

@@ -19,3 +19,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
+#testimonials::-webkit-scrollbar {
+  display: none;
+}

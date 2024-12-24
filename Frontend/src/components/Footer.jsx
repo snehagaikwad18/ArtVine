@@ -12,7 +12,7 @@ const Footer = () => {
                         <h1>Biography</h1>
                         <h1>Works</h1>
                         <h1>Custom Art</h1>
-                        <h1>Testinomials</h1>
+                        <h1>Testimonialss</h1>
                         <h1>Track Order</h1>
                         <div className="flex flex-row gap-2">
                             <FiTwitter />

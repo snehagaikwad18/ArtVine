@@ -2,7 +2,7 @@ import { RiDoubleQuotesL } from "react-icons/ri";
 
 const Biography = () => {
     return (
-        <div className='h-screen bg-[#0C1013] pt-5 text-white flex flex-col justify-between items-center gap-10 '>
+        <div id="biography" className='h-screen bg-[#0C1013] pt-5 text-white flex flex-col justify-between items-center gap-10 '>
             <div className=" h-1/2 w-full flex flex-row justify-center  items-center gap-10   ">
                 <div className="w-1/3   h-full flex items-center justify-start px-10 relative mt-[90px] mb-5 ">
                     <div className="w-[350px] h-[350px] bg-[#9EC4BD] absolute top-[20px] left-[60px]" />

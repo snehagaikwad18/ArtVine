@@ -1,7 +1,7 @@
 
-import work1 from '../../public/work1.jpg'
-import work2 from '../../public/work2.jpg'
-import work3 from '../../public/work3.jpg'
+import work1 from '/work1.jpg'
+import work2 from '/work2.jpg'
+import work3 from '/work3.jpg'
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 
@@ -70,7 +70,7 @@ const Work = () => {
 
     ]
     return (
-        <div className='bg-[#0C1013] text-white px-[50px] py-[30px] '>
+        <div id='works' className='bg-[#0C1013] text-white px-[50px] py-[30px] '>
             <h1 className="font-bold text-[50px] tracking-wider">Works</h1>
             <div className="border-t-[3px] border-[#9EC4BD] w-[100px] pb-2 "></div>
             <div className="flex flex-row items-center justify-between pt-[100px]">
@@ -91,6 +91,9 @@ const Work = () => {
                                     className="p-10 bg-white h-[400px]"
                                     style={{ backgroundImage: `url(${item.img})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
                                 <h1 className='text-[#9EC4BD] flex flex-row items-center poppins-regular '><MdKeyboardDoubleArrowLeft /> {`${item.name}`}<MdKeyboardDoubleArrowRight />, {`${item.year}`}</h1>
+                                <div className="flex  pt-1">
+                                    <button className=' bg-white font-bold w-fit px-8 text-black py-2 rounded-md'>Buy </button>
+                                </div>
                             </div>
                         )
                     })
