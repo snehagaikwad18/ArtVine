@@ -66,85 +66,127 @@
 
 // module.exports = { data: sampleListing };
 
+// const sampleData = [
+//   {
+//     title: "Starry Night",
+//     description:
+//       "A mesmerizing portrayal of the night sky with swirling stars.",
+//     price: 1500,
+//     image_url: "https://example.com/images/starry-night.jpg",
+//     width: 80,
+//     height: 60,
+//     medium: "Oil on Canvas",
+//     category: "Abstract",
+//     style: "Post-Impressionism",
+//     available_stock: 10,
+//     rating: 4.8,
+//     reviews: [
+//       {
+//         user: "JohnDoe123",
+//         comment: "Absolutely stunning artwork! Looks even better in person.",
+//         rating: 5,
+//       },
+//       {
+//         user: "ArtLover99",
+//         comment: "Beautiful piece, but I expected a larger size.",
+//         rating: 4,
+//       },
+//     ],
+//   },
+//   {
+//     title: "The Persistence of Memory",
+//     description:
+//       "A surreal masterpiece featuring melting clocks symbolizing the fluidity of time.",
+//     price: 2000,
+//     image_url: "https://example.com/images/persistence-of-memory.jpg",
+//     width: 100,
+//     height: 70,
+//     medium: "Oil on Canvas",
+//     category: "Surrealism",
+//     style: "Modern",
+//     available_stock: 5,
+//     rating: 4.7,
+//     reviews: [
+//       {
+//         user: "SurrealFan42",
+//         comment:
+//           "A timeless piece that captures the surrealistic vibe perfectly.",
+//         rating: 5,
+//       },
+//       {
+//         user: "Collector2023",
+//         comment: "Beautiful, but the price feels a bit steep.",
+//         rating: 4,
+//       },
+//     ],
+//   },
+//   {
+//     title: "Mona Lisa",
+//     description:
+//       "The iconic portrait by Leonardo da Vinci, capturing enigmatic beauty and mystery.",
+//     price: 3000,
+//     image_url: "https://example.com/images/mona-lisa.jpg",
+//     width: 77,
+//     height: 53,
+//     medium: "Oil on Poplar Panel",
+//     category: "Portrait",
+//     style: "Renaissance",
+//     available_stock: 2,
+//     rating: 5,
+//     reviews: [
+//       {
+//         user: "HistoryBuff",
+//         comment: "An all-time classic. A must-have for any art enthusiast!",
+//         rating: 5,
+//       },
+//       {
+//         user: "ArtFanatic88",
+//         comment: "It’s perfect, nothing else to say.",
+//         rating: 5,
+//       },
+//     ],
+//   },
+// ];
+
 const sampleData = [
   {
-    title: "Starry Night",
-    description:
-      "A mesmerizing portrayal of the night sky with swirling stars.",
-    price: 1500,
-    image_url: "https://example.com/images/starry-night.jpg",
-    width: 80,
-    height: 60,
-    medium: "Oil on Canvas",
-    category: "Abstract",
-    style: "Post-Impressionism",
-    available_stock: 10,
-    rating: 4.8,
-    reviews: [
-      {
-        user: "JohnDoe123",
-        comment: "Absolutely stunning artwork! Looks even better in person.",
-        rating: 5,
-      },
-      {
-        user: "ArtLover99",
-        comment: "Beautiful piece, but I expected a larger size.",
-        rating: 4,
-      },
-    ],
+    name: "Sneha Gaikwad",
+    phone: "9876543210",
+    email: "sneha@example.com",
+    dob: "2000-05-15",
+    address: "123 Art Street",
+    city: "Pune",
+    state: "Maharashtra",
+    country: "India",
+    biography: "Passionate artist exploring modern and traditional art forms.",
+    artistType: "Painter",
+    imageUrl: "https://example.com/sneha-profile.jpg",
   },
   {
-    title: "The Persistence of Memory",
-    description:
-      "A surreal masterpiece featuring melting clocks symbolizing the fluidity of time.",
-    price: 2000,
-    image_url: "https://example.com/images/persistence-of-memory.jpg",
-    width: 100,
-    height: 70,
-    medium: "Oil on Canvas",
-    category: "Surrealism",
-    style: "Modern",
-    available_stock: 5,
-    rating: 4.7,
-    reviews: [
-      {
-        user: "SurrealFan42",
-        comment:
-          "A timeless piece that captures the surrealistic vibe perfectly.",
-        rating: 5,
-      },
-      {
-        user: "Collector2023",
-        comment: "Beautiful, but the price feels a bit steep.",
-        rating: 4,
-      },
-    ],
+    name: "Aryan Sharma",
+    phone: "9123456789",
+    email: "aryan.sharma@example.com",
+    dob: "1995-08-22",
+    address: "56 Creative Lane",
+    city: "Mumbai",
+    state: "Maharashtra",
+    country: "India",
+    biography: "Sculptor creating breathtaking marble sculptures.",
+    artistType: "Sculptor",
+    imageUrl: "https://example.com/aryan-art.jpg",
   },
   {
-    title: "Mona Lisa",
-    description:
-      "The iconic portrait by Leonardo da Vinci, capturing enigmatic beauty and mystery.",
-    price: 3000,
-    image_url: "https://example.com/images/mona-lisa.jpg",
-    width: 77,
-    height: 53,
-    medium: "Oil on Poplar Panel",
-    category: "Portrait",
-    style: "Renaissance",
-    available_stock: 2,
-    rating: 5,
-    reviews: [
-      {
-        user: "HistoryBuff",
-        comment: "An all-time classic. A must-have for any art enthusiast!",
-        rating: 5,
-      },
-      {
-        user: "ArtFanatic88",
-        comment: "It’s perfect, nothing else to say.",
-        rating: 5,
-      },
-    ],
+    name: "Aisha Khan",
+    phone: "9988776655",
+    email: "aisha.khan@example.com",
+    dob: "1998-03-10",
+    address: "789 Design Avenue",
+    city: "Bangalore",
+    state: "Karnataka",
+    country: "India",
+    biography: "Digital artist specializing in concept art and animation.",
+    artistType: "Digital Artist",
+    imageUrl: "https://example.com/aisha-digitalart.jpg",
   },
 ];
 

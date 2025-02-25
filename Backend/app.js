@@ -31,6 +31,7 @@ app.get("/listings", async (req, res) => {
   res.json(data);
 });
 
+// arts api start //
 app.delete("/api/admin/arts/:id", async (req, res) => {
   let { id } = req.params;
   const deletedData = await Art.findByIdAndDelete(id, {
@@ -47,19 +48,42 @@ app.get("/api/admin/arts", async (req, res) => {
 });
 
 app.post("/api/admin/arts/new", async (req, res) => {
-  const newData = new Art({
-    ...req.body,
-  });
-  await newData
-    .save()
-    .then(() => {
-      console.log("data save successfully");
-    })
-    .catch((err) => {
-      console.log(err);
+  try {
+    const newData = new Art({
+      ...req.body,
     });
-  console.log("this is art data :", newData);
-  res.json(newData);
+    await newData
+      .save()
+      .then((res) => {
+        console.log("this is res ::", res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    console.log("this is art data :", newData);
+    res.json(newData);
+  } catch (error) {
+    throw error;
+  }
+});
+
+app.patch("/api/admin/arts/:id", async (req, res) => {
+  let { id } = req.params;
+  try {
+    const updatedData = await Art.findByIdAndUpdate(
+      id,
+      { ...req.body },
+      { runValidators: true, new: true }
+    );
+    if (!updatedData) {
+      return res.status(404).json({ message: "Art Not Found" });
+    }
+    console.log("updated Data", updatedData);
+    res.status(202).json(updatedData);
+  } catch (error) {
+    console.error("Error updating art:", error);
+    res.status(500).json({ message: "Internal Server Error", error });
+  }
 });
 
 app.get("/api/admin/arts/:id", async (req, res) => {
@@ -69,10 +93,18 @@ app.get("/api/admin/arts/:id", async (req, res) => {
     console.log("backend fetched data ::", data);
     res.json(data);
   } catch (error) {
-    console.log("Error : " , error)
-    throw error
+    console.log("Error : ", error);
+    throw error;
   }
 });
+// arts api end //
+
+// personal details api start //
+app.get("/api/admin/personal-details", (req, res) => {
+  res.send("Personal details Successfull");
+});
+
+// personal details api end //
 
 app.get("/", (req, res) => {
   res.send("root is working");

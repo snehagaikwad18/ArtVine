@@ -19,6 +19,9 @@ import PersonalDetailsEdit from './adminDashboard/PersonalDetailsEdit'
 import PersonalDetails from './adminDashboard/PersonalDetails'
 import ArtEdit from './adminDashboard/artEdit'
 import NewArt from './adminDashboard/NewArt'
+import ErrorBoundary from '../ErrorBoundary'
+import NewPersonalDetails from './adminDashboard/NewPersonalDetails'
+import { toast, ToastContainer } from 'react-toastify'
 
 const LandingPage = () => {
     return (
@@ -44,14 +47,17 @@ const LandingPage = () => {
                             <Route path='/admin/orders/:orderId' element={<OrderDetails />} />
                         </Route>
                         <Route path='/admin/personal-details' element={<PersonalDetails />}>
+                            <Route path='/admin/personal-details/new' element={<NewPersonalDetails />} />
                             <Route path='/admin/personal-details/:id' element={<PersonalDetailsEdit />} />
                         </Route>
                         <Route path='/admin/arts' element={<OngoingOrderListing />} >
-                            <Route  path='/admin/arts/new' element={<NewArt />} />
-                            <Route  path='/admin/arts/:id' element={<ArtEdit />} />
+                            <Route path='/admin/arts/new' element={<NewArt />} />
+                            <Route path='/admin/arts/:id' element={<ErrorBoundary> <ArtEdit /> </ErrorBoundary>} />
                         </Route>
 
                     </Route>
+
+                    {/* <ToastContainer /> */}
                 </Routes>
             </BrowserRouter>
 

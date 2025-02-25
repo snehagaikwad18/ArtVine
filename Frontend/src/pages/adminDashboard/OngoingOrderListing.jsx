@@ -1,14 +1,15 @@
 import { BiRupee } from 'react-icons/bi'
 import { NavLink, Outlet, useLocation, useParams } from 'react-router-dom'
 import usePaintingStore from '../../PaintingStore'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import axios from 'axios'
 
 const OngoingOrderListing = () => {
   const allPaintings = usePaintingStore((state) => state.paintings)
-  const [fetchedData, setFectchedData] = useState()
   const location = useLocation()
   const { id } = useParams()
+
+  const setPainting = usePaintingStore((state) => state.setPainting)
 
   const isPathNew = location.pathname === "/admin/arts/new"
 
@@ -17,26 +18,25 @@ const OngoingOrderListing = () => {
   }
 
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const url = "http://localhost:8080/api/admin/arts"
-  //     try {
-  //       await axios.get(url)
-  //         .then((res) => {
-  //           console.log("data fetched successfully", res.data)
-  //           setFectchedData(res.data)
-  //           // addNewPainting(resData)
-  //         })
-  //         .catch((err) => {
-  //           console.log("this is error : ", err)
-  //         })
-  //     } catch (error) {
-  //       console.log("this is error : ", error)
-  //     }
-  //   }
+  useEffect(() => {
+    const fetchData = async () => {
+      const url = "http://localhost:8080/api/admin/arts"
+      try {
+        await axios.get(url)
+          .then((res) => {
+            console.log("data fetched successfully", res.data)
+            setPainting(res.data)
+          })
+          .catch((err) => {
+            console.log("this is error : ", err)
+          })
+      } catch (error) {
+        console.log("this is error : ", error)
+      }
+    }
+    fetchData()
+  }, [])
 
-  //   fetchData()
-  // }, [])
 
   return (
     <div className="w-full h-full">
@@ -64,13 +64,11 @@ const OngoingOrderListing = () => {
               </button>
             </NavLink>
           </div>
-
+          <h1 className='text-red-500 font-bold ' >Add enable disabled button to show arts on frontend </h1>
           {
             allPaintings ? allPaintings.map((item, index) => {
-              // addNewPainting(item)
               return (
                 <div key={index} className="flex flex-row items-center justify-between  border-b py-5">
-                  {/* {addNewPainting(item)} */}
                   <h1 className=' w-1/4 '>#{item._id}</h1>
                   <h1 className="w-1/4  text-start text-[#5C5C5C] text-[13px]">{item.title}</h1>
                   <h1 className="w-1/4  text-start text-[#5C5C5C] text-[13px]">{item.category && item.category || "Category"}</h1>

@@ -9,7 +9,9 @@ import { useEffect, useState } from 'react'
 const ArtEdit = () => {
   const { id } = useParams()
   const navigate = useNavigate()
+
   const removePainting = usePaintingStore((state) => state.removePainting)
+  const updatePainting = usePaintingStore((state) => state.updatePainting)
 
   const [artData, setArtData] = useState({
     title: "",
@@ -54,116 +56,164 @@ const ArtEdit = () => {
 
   }
 
-  const handleUpdate = (e) => {
-    e.preventDefault()
-    console.log("updated id :", id)
-    toast.success('Updated Successfully !', {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      // transition: Bounce,
-    });
+  const handleOnchange = (e) => {
+    let { name, value } = e.target
+    setArtData((prevArtData) => ({
+      ...prevArtData,
+      [name]: value
+    }))
   }
 
-  const getdata = () => {
-    if (artData) {
-      console.log("thi is  art data ::", artData)
+  const handleUpdate = async (e) => {
+    e.preventDefault()
+    console.log("updated Data", artData)
+    console.log("updated id :", id)
+    const url = "http://localhost:8080/api/admin/arts/"
+
+    try {
+      const res = await axios.patch(`${url}${id}`, artData)
+      const resData = res.data
+      console.log("this is updated after api request ::", resData)
+      updatePainting(id, resData)
+
+      setTimeout(() => {
+        navigate("/admin/arts")
+      }, 1000)
+        
+
+        toast.success('Updated Successfully !', {
+          position: "top-right",
+          autoClose: 999,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          // transition: Bounce,
+        });
+
+    } catch (error) {
+      toast.error('Something Went Wrong !', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        // transition: Bounce,
+      });
+      console.log(error)
+      throw error
     }
+
   }
+
+  // const getdata = () => {
+  //   if (artData) {
+  //     console.log("thi is  art data ::", artData)
+  //   }
+  // }
 
   useEffect(() => {
     const getPaintingDetails = async () => {
-      const url = "http://localhost:8080/api/admin/arts/"
-      const res = await axios.get(`${url}${id}`)
-      console.log("this is get data :", res.data)
-      setArtData(res.data)
-    }
+      try {
+        const url = "http://localhost:8080/api/admin/arts/";
+        const res = await axios.get(`${url}${id}`);
+        console.log("Fetched painting data:", res.data);
 
-    getPaintingDetails()
-  }, [])
+        //  Correct way to update state
+        setArtData(res.data);
+      } catch (error) {
+        console.log("Error fetching painting:", error);
+      }
+    };
+
+    getPaintingDetails();
+  }, [id]); //  Include `id` as a dependency
+
   return (
     <div className='w-full h-full bg-white'>
       <ToastContainer />
       <div className="bg-white w- h-[650px]  overflow-y-auto">
         <div className="p-5">
-
-          <button onClick={getdata} >get data</button>
           <form method="POST" action=""
             onSubmit={handleUpdate}
           >
             <div className="flex flex-col pb-5 px-5 gap-5 w-full">
               <div className="flex flex-row items-center justify-start gap-5 w-full">
                 <h1 className="text-[20px] font-semibold w-1/4 " >Name :</h1>
-                <textarea required rows="1" cols="50" name="title" id="title" value={artData.title} className=" w-full outline-none resize-none shadow-xl border px-5 py-1 rounded-lg">{artData && artData.title}</textarea>
+                <textarea required onChange={handleOnchange} rows="1" cols="50" name="title" id="title" value={artData.title} className=" w-full outline-none resize-none shadow-xl border px-5 py-1 rounded-lg">{artData && artData.title}</textarea>
               </div>
 
 
               <div className="flex flex-row items-center justify-start gap-5 w-full">
                 <label htmlFor="" className="text-[20px] font-semibold w-1/4 text-nowrap  " >Dimensions : </label >
                 <div className="flex flex-row items-center justify-start gap-2 w-full">
-                  <textarea required rows="1" cols="50" name="height" id="height" value={artData.height} className="  outline-none resize-none shadow-2xl border px-5 py-1 rounded-lg w-[80px]">{artData && artData.height}</textarea>
+                  <textarea required onChange={handleOnchange} rows="1" cols="50" name="height" id="height" value={artData.height} className="  outline-none resize-none shadow-2xl border px-5 py-1 rounded-lg w-[80px]">{artData && artData.height}</textarea>
                   <label htmlFor="" className="  text-[15px] text-[#575757] flex flex-row justify-center items-center "><HiOutlineXMark /></label >
-                  <textarea required rows="1" cols="50" name="width" id="width" value={artData.width} className="  outline-none resize-none shadow-2xl border px-5 py-1 rounded-lg w-[80px]">{artData && artData.width}</textarea>
+                  <textarea required onChange={handleOnchange} rows="1" cols="50" name="width" id="width" value={artData.width} className="  outline-none resize-none shadow-2xl border px-5 py-1 rounded-lg w-[80px]">{artData && artData.width}</textarea>
                 </div>
               </div>
 
               <div className="flex flex-row items-center justify-start gap-5 w-full">
                 <label htmlFor="category" className="text-[20px] font-semibold w-1/4" >Category : </label >
-                <textarea required rows="1" cols="50" name="category" id="category" value={artData.category} className=" w-full outline-none resize-none shadow-2xl border px-5 py-1 rounded-lg">{artData && artData.category}</textarea>
+                <textarea required onChange={handleOnchange} rows="1" cols="50" name="category" id="category" value={artData.category} className=" w-full outline-none resize-none shadow-2xl border px-5 py-1 rounded-lg">{artData && artData.category}</textarea>
               </div>
 
               <div className="flex flex-row items-center justify-start gap-5 w-full">
                 <label htmlFor="" className="text-[20px] font-semibold w-1/4" >Medium : </label >
-                <textarea required rows="1" cols="50" name="medium" id="medium" value={artData.medium} className=" w-full outline-none resize-none shadow-2xl border px-5 py-1 rounded-lg">{artData && artData.medium}</textarea>
+                <textarea required onChange={handleOnchange} rows="1" cols="50" name="medium" id="medium" value={artData.medium} className=" w-full outline-none resize-none shadow-2xl border px-5 py-1 rounded-lg">{artData && artData.medium}</textarea>
               </div>
 
               <div className="flex flex-row items-center justify-start gap-5 w-full">
                 <label htmlFor="" className="text-[20px] font-semibold w-1/4" >Stock : </label >
-                <textarea required rows="1" cols="50" name="stock" id="stock" value={artData.available_stock} className=" w-full outline-none resize-none shadow-2xl border px-5 py-1 rounded-lg">{artData && artData.available_stock}</textarea>
+                <textarea required onChange={handleOnchange} rows="1" cols="50" name="available_stock" id="available_stock" value={artData.available_stock} className=" w-full outline-none resize-none shadow-2xl border px-5 py-1 rounded-lg">{artData && artData.available_stock}</textarea>
               </div>
 
               <div className="flex flex-row items-center justify-start gap-5 w-full">
                 <label htmlFor="" className="text-[20px] font-semibold w-1/4" >Rating : </label >
-                <textarea required rows="1" cols="50" name="rating" id="rating" value={artData.rating} className=" w-full outline-none resize-none shadow-2xl border px-5 py-1 rounded-lg">{artData && artData.rating}</textarea>
+                <textarea required onChange={handleOnchange} rows="1" cols="50" name="rating" id="rating" value={artData.rating} className=" w-full outline-none resize-none shadow-2xl border px-5 py-1 rounded-lg">{artData && artData.rating}</textarea>
               </div>
 
               {/* <div className="flex flex-row items-center justify-start gap-5 w-full">
                 <label htmlFor="" className="text-[20px] font-semibold w-1/4" >Review : </label >
-                <textarea required rows="1" cols="50" name="name" id="name" className=" w-full outline-none resize-none shadow-2xl border px-5 py-1 rounded-lg">
+                <textarea required  onChange={handleOnchange}  rows="1" cols="50" name="name" id="name" className=" w-full outline-none resize-none shadow-2xl border px-5 py-1 rounded-lg">
                   i love this painting
                 </textarea>
               </div> */}
 
               <div className=" flex flex-row items-center justify-start gap-5 w-full  text-[15px]  ">
                 <h1 className="text-[20px] font-semibold   w-1/4" >Price :</h1>
-                <textarea required rows="1" cols="50" name="price" id="price" value={artData.price} className=" w-full outline-none resize-none shadow-2xl border px-5 py-1 rounded-lg">{artData && artData.price}</textarea>
+                <textarea required onChange={handleOnchange} rows="1" cols="50" name="price" id="price" value={artData.price} className=" w-full outline-none resize-none shadow-2xl border px-5 py-1 rounded-lg">{artData && artData.price}</textarea>
               </div>
 
               <div className="flex flex-row items-start justify-start gap-5 w-full ">
                 <label htmlFor="image_url" className="text-[20px] font-semibold w-1/4 text-nowrap " >Painting url:</label >
-                <textarea rows="3" cols="50" name="image_url" id="image_url" value={artData.image_url} className=" outline-none resize-none shadow-2xl border px-5 py-1 rounded-lg text-[15px] text-[#3050c7] w-full ">{artData && artData.image_url}</textarea>
+                <textarea required onChange={handleOnchange} rows="3" cols="50" name="image_url" id="image_url" value={artData.image_url} className=" outline-none resize-none shadow-2xl border px-5 py-1 rounded-lg text-[15px] text-[#3050c7] w-full ">{artData && artData.image_url}</textarea>
               </div>
 
-              <div className="w-full gap-5 flex flex-row items-center justify-center pt-5">
-                <button className="text-white bg-[#4A6A7B] h-[40px] rounded-md w-[150px] "
-                  onClick={handleUpdate}
-                >
-                  Update
-                </button>
-              </div>
+
             </div>
           </form>
 
-          <button className="text-white bg-red-500 h-[40px] rounded-md w-[150px] "
-            onClick={handleDelete}
-          >
-            Delete
-          </button>
+          <div className="w-full gap-5 flex flex-row items-center justify-center pt-5">
+            <button className="text-white bg-[#4A6A7B] h-[40px] rounded-md w-[150px] "
+              onClick={handleUpdate}
+            >
+              Update
+            </button>
+
+            <button className="text-white bg-red-500 h-[40px] rounded-md w-[150px] "
+              onClick={handleDelete}>
+              Delete
+            </button>
+          </div>
+          <div className="flex justify-center ">
+
+          </div>
 
 
         </div>
