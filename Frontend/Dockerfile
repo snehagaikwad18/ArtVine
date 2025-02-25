@@ -1,8 +1,8 @@
 # Use Node.js base image for building React app
-FROM node:18 AS builder
+FROM node:20-alpine AS builder
 
 WORKDIR /app
-COPY package.json package-lock.json ./
+COPY package*.json  ./
 RUN npm install
 COPY . .
 RUN npm run build
